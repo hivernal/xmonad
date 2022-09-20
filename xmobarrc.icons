@@ -1,0 +1,42 @@
+Config
+  { overrideRedirect = False
+  , additionalFonts = [ "xft:JetBrainsMonoMedium Nerd Font-14"
+                      , "xft:JetBrainsMonoMedium Nerd Font-15"
+                      , "xft:JetBrainsMonoMedium Nerd Font-17"
+                      , "xft:JetBrainsMonoMedium Nerd Font-19"
+                      ]
+  , font     = "xft:JetBrainsMonoMedium Nerd Font-13"
+  , bgColor  = "#282c34"
+  , fgColor  = "#fcfcfc"
+  , borderWidth = 5
+  , position = Top 100
+  , lowerOnStart = False
+  , commands =
+      [ Run BatteryP ["BAT0"]
+          [ "-t", "<acstatus>"
+          , "-S", "Off", "-d", "0", "-m", "3"
+          , "-L", "10", "-H", "90", "-p", "3"
+          , "-W", "0"
+          , "-f", "\xf244\xf243\xf243\xf243\xf242\xf242\xf242\xf241\xf241\xf240"
+          , "--"
+          , "-P"
+           , "-A", "5"
+          , "-i", "\xf1e6"
+          , "-O", "\xf1e6  <leftbar> <left>"
+          , "-o", "<leftbar> <left>"
+          , "-H", "10", "-L", "7"
+          ] 50
+      , Run Kbd [ ("us(dvorak)", "DV"), ("us", "<fn=3> </fn>US")
+                , ("ru(dvorak)", "DV"), ("ru", "<fn=3> </fn>RU")
+                ]
+      , Run Memory ["-t", "<fn=4></fn> <used> Mi"] 20
+      , Run Date "<fn=2> </fn>%H:%M:%S" "date" 10
+      , Run Wireless "wlan0" ["-t", "<fn=3> </fn><ssid>"] 50
+      , Run Com "/home/nikita/.config/xmonad/volume.sh" [] "volume_icon" 10
+      , Run Com "pamixer" ["--get-volume-human"] "volume" 5
+      , Run XMonadLog 
+      ]
+      , sepChar  = "%"
+      , alignSep = "}{"
+      , template = "%XMonadLog%}%date%{%kbd%   <fn=4>%volume_icon% </fn>%volume%   %battery%   %memory%   %wlan0wi% "
+    }
