@@ -8,21 +8,21 @@ import XMonad.Util.Loggers
 import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders
 
--- import XMonad.Hooks.DynamicLog
--- import XMonad.Hooks.StatusBar
--- import XMonad.Hooks.StatusBar.PP
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.StatusBar
+import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.Place
 import XMonad.Hooks.EwmhDesktops
 
 
--- myXmobarPP :: PP
--- myXmobarPP = def
---     { ppCurrent         = xmobarColor "#fcfcfc" "#646870" . wrap " " " " 
---     , ppHidden          = xmobarColor "#fcfcfc" "" . wrap " " " "
---     , ppSep             = " "
---     , ppTitle           = xmobarColor "#fcfcfc" "" .shorten 60
---     , ppOrder           = \[ws, _, t] -> [ws, t]
---     }
+myXmobarPP :: PP
+myXmobarPP = def
+    { ppCurrent         = xmobarColor "#fcfcfc" "#646870" . wrap " " " " 
+    , ppHidden          = xmobarColor "#fcfcfc" "" . wrap " " " "
+    , ppSep             = " "
+    , ppTitle           = xmobarColor "#fcfcfc" "" .shorten 60
+    , ppOrder           = \[ws, _, t] -> [ws, t]
+    }
 
 myLayout = smartBorders tiled ||| noBorders Full
   where
@@ -38,7 +38,7 @@ main :: IO ()
 main = xmonad 
     . ewmhFullscreen
     . ewmh
-    -- . withEasySB (statusBarProp "xmobar" (pure myXmobarPP)) defToggleStrutsKey
+    . withEasySB (statusBarProp "xmobar" (pure myXmobarPP)) defToggleStrutsKey
     $ myConfig 
 
 
@@ -64,6 +64,7 @@ myConfig = def
     , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%")
     , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%")
     , ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+		, ("<Print>", spawn "flameshot gui")
     ]
   `removeKeysP`
 
