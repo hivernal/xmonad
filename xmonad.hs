@@ -19,12 +19,13 @@ myXmobarPP :: PP
 myXmobarPP = def
     { ppCurrent         = xmobarColor "#fcfcfc" "#646870" . wrap " " " " 
     , ppHidden          = xmobarColor "#fcfcfc" "" . wrap " " " "
+		, ppHiddenNoWindows = xmobarColor "#646870" "" . wrap " " " "
     , ppSep             = " "
-    , ppTitle           = xmobarColor "#fcfcfc" "" .shorten 60
+    , ppTitle           = xmobarColor "#fcfcfc" "" .shorten 55
     , ppOrder           = \[ws, _, t] -> [ws, t]
     }
 
-myLayout = smartBorders tiled ||| noBorders Full
+myLayout = smartBorders (withBorder 3 tiled) ||| noBorders Full
   where
     tiled   = Tall nmaster delta ratio
     nmaster = 1      -- Default number of windows in the master pane
@@ -46,7 +47,7 @@ myConfig = def
   { modMask = mod4Mask
   , layoutHook = spacingRaw False (Border 10 10 10 10) True (Border 10 10 10 10) True $ myLayout
   , terminal = "alacritty"
-  ,  borderWidth = 3
+  ,  borderWidth = 0
   ,  normalBorderColor  = "#282c34"
   ,  focusedBorderColor = "#fcfcfc"
   ,  manageHook = placeHook myPlacement <> manageHook def

@@ -27,14 +27,14 @@ Config
       , Run Kbd [ ("us(dvorak)", "DV"), ("us", "<fn=2>\xf80b<hspace=15/></fn>US")
                 , ("ru(dvorak)", "DV"), ("ru", "<fn=2>\xf80b<hspace=15/></fn>RU")
                 ]
-      , Run Memory ["-t", "<fn=1>\xf1c0<hspace=10/></fn><used> Mi"] 20
+      , Run Memory ["-t", "<fn=1>\xf1c0<hspace=10/></fn><used><hspace=5/>Mi"] 20
       , Run Date "<fn=1>\xf017<hspace=10/></fn>%H:%M" "date" 600
       , Run Wireless "wlan0" ["-t", "<fn=4>\xf1eb<hspace=17/></fn><ssid>"] 50
       , Run XMonadLog 
 			, Run Com "pamixer" ["--get-volume-human"] "volume" 5
-			, Run Com "/home/nikita/.config/xmonad/volume.sh" [] "volume_icon" 5
+			, Run Com "/home/nikita/.config/xmonad/volume.sh" [] "volume-icon" 5
       ]
       , sepChar  = "%"
       , alignSep = "}{"
-      , template = "%XMonadLog%}%date%{%kbd%   <fn=3>%volume_icon%</fn><hspace=10/>%volume%   %battery%   %memory%   %wlan0wi% "
+      , template = "%XMonadLog%}%date%{%kbd%   <fn=3>%volume-icon%</fn><hspace=10/>%volume%   %battery%   %memory%   %wlan0wi% "
     }
