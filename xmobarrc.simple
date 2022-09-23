@@ -3,7 +3,6 @@ Config
   , font     = "xft:JetBrainsMonoMedium Nerd Font-13"
   , bgColor  = "#282c34"
   , fgColor  = "#fcfcfc"
-  , borderWidth = 5
   , position = Top 100
   , commands =
       [ Run Kbd [ ("us(dvorak)", "DV"), ("us", "US")
@@ -12,7 +11,7 @@ Config
       , Run BatteryP ["BAT0"] [ "-t", "BAT <left>%"] 50
       , Run Memory ["-t", "MEM <used> Mi"] 20
       , Run Date "%H:%M:%S" "date" 10
-      , Run Wireless "wlan0" ["-t", "WLAN0 <quality>% <ssid>"] 50
+      , Run Wireless "wlan0" ["-t", "NET <quality>% <ssid>"] 50
       --, Run Com "/home/nikita/.config/xmobar/volume.sh" [] "volume_icon" 10
       , Run Com "pamixer" ["--get-volume-human"] "volume" 5
       , Run XMonadLog 

@@ -38,7 +38,7 @@ main :: IO ()
 main = xmonad 
     . ewmhFullscreen
     . ewmh
-    . withEasySB (statusBarProp "xmobar" (pure myXmobarPP)) defToggleStrutsKey
+    . withEasySB (statusBarProp "xmobar ~/.config/xmonad/xmobarrc.icons" (pure myXmobarPP)) defToggleStrutsKey
     $ myConfig 
 
 

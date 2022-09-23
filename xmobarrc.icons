@@ -1,42 +1,40 @@
 Config
   { overrideRedirect = False
-  , additionalFonts = [ "xft:JetBrainsMonoMedium Nerd Font-14"
-                      , "xft:JetBrainsMonoMedium Nerd Font-15"
-                      , "xft:JetBrainsMonoMedium Nerd Font-17"
-                      , "xft:JetBrainsMonoMedium Nerd Font-19"
-                      ]
+  , additionalFonts = [ "xft:JetBrainsMonoMedium Nerd Font-15"
+                      , "xft:JetBrainsMonoMedium Nerd Font-18"
+                      , "xft:JetBrainsMonoMedium Nerd Font-22"
+											, "xft:JetBrainsMonoMedium Nerd Font-16" ]
   , font     = "xft:JetBrainsMonoMedium Nerd Font-13"
   , bgColor  = "#282c34"
   , fgColor  = "#fcfcfc"
-  , borderWidth = 5
   , position = Top 100
-  , lowerOnStart = False
   , commands =
       [ Run BatteryP ["BAT0"]
-          [ "-t", "<acstatus>"
-          , "-S", "Off", "-d", "0", "-m", "3"
-          , "-L", "10", "-H", "90", "-p", "3"
-          , "-W", "0"
-          , "-f", "\xf244\xf243\xf243\xf243\xf242\xf242\xf242\xf241\xf241\xf240"
-          , "--"
-          , "-P"
-           , "-A", "5"
-          , "-i", "\xf1e6"
-          , "-O", "\xf1e6  <leftbar> <left>"
-          , "-o", "<leftbar> <left>"
-          , "-H", "10", "-L", "7"
-          ] 50
-      , Run Kbd [ ("us(dvorak)", "DV"), ("us", "<fn=3> </fn>US")
-                , ("ru(dvorak)", "DV"), ("ru", "<fn=3> </fn>RU")
+         [ "-t", "<acstatus>"
+         , "-S", "On", "-d", "0"
+         , "-L", "10", "-H", "90"
+         , "-W", "0"
+         , "-f", "\xf244\xf243\xf243\xf243\xf242\xf242\xf242\xf241\xf241\xf240"
+         , "--"
+         , "-a", "!"
+         , "-A", "10"
+         , "-i", "<fn=1>\xf240<hspace=20/></fn>full" -- Full carge
+         , "-O", "<fn=1>\xf1e6<hspace=15/><leftbar><hspace=20/></fn><left>" -- Battery charging format
+         , "-o", "<fn=1><leftbar><hspace=20/></fn><left>" -- Battery discharging format
+         , "-H", "10", "-L", "7"
+         ] 50
+
+      , Run Kbd [ ("us(dvorak)", "DV"), ("us", "<fn=2>\xf80b<hspace=15/></fn>US")
+                , ("ru(dvorak)", "DV"), ("ru", "<fn=2>\xf80b<hspace=15/></fn>RU")
                 ]
-      , Run Memory ["-t", "<fn=4></fn> <used> Mi"] 20
-      , Run Date "<fn=2> </fn>%H:%M:%S" "date" 10
-      , Run Wireless "wlan0" ["-t", "<fn=3> </fn><ssid>"] 50
-      , Run Com "/home/nikita/.config/xmonad/volume.sh" [] "volume_icon" 10
-      , Run Com "pamixer" ["--get-volume-human"] "volume" 5
+      , Run Memory ["-t", "<fn=1>\xf1c0<hspace=10/></fn><used> Mi"] 20
+      , Run Date "<fn=1>\xf017<hspace=10/></fn>%H:%M" "date" 600
+      , Run Wireless "wlan0" ["-t", "<fn=4>\xf1eb<hspace=17/></fn><ssid>"] 50
       , Run XMonadLog 
+			, Run Com "pamixer" ["--get-volume-human"] "volume" 5
+			, Run Com "/home/nikita/.config/xmonad/volume.sh" [] "volume_icon" 5
       ]
       , sepChar  = "%"
       , alignSep = "}{"
-      , template = "%XMonadLog%}%date%{%kbd%   <fn=4>%volume_icon% </fn>%volume%   %battery%   %memory%   %wlan0wi% "
+      , template = "%XMonadLog%}%date%{%kbd%   <fn=3>%volume_icon%</fn><hspace=10/>%volume%   %battery%   %memory%   %wlan0wi% "
     }
