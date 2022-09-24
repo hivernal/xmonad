@@ -16,7 +16,7 @@ Config
          , "-W", "0"
          , "-f", "\xf244\xf243\xf243\xf243\xf242\xf242\xf242\xf241\xf241\xf240"
          , "--"
-         , "-a", "!"
+         , "-a", "empty!"
          , "-A", "10"
          , "-i", "<fn=1>\xf240<hspace=20/></fn>full" -- Full carge
          , "-O", "<fn=1>\xf1e6<hspace=15/><leftbar><hspace=20/></fn><left>" -- Battery charging format
