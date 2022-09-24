@@ -6,7 +6,7 @@ import XMonad.Util.Ungrab
 import XMonad.Util.Loggers
 
 import XMonad.Layout.Spacing
-import XMonad.Layout.NoBorders
+import XMonad.Layout.NoBorders 
 
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.StatusBar
@@ -62,9 +62,12 @@ myConfig = def
     , ("M-S-e",  io exitSuccess)
     , ("<XF86MonBrightnessUp>", spawn "xbacklight -inc 5")
     , ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 5")
-    , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%")
-    , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%")
-    , ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+    , ("<XF86AudioLowerVolume>", spawn "amixer sset Master 5%-")
+    , ("<XF86AudioRaiseVolume>", spawn "amixer sset Master 5%+")
+    , ("<XF86AudioMute>", spawn "amixer sset Master toggle")
+    -- , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%")
+    -- , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%")
+    -- , ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
 		, ("<Print>", spawn "flameshot gui")
     ]
   `removeKeysP`
