@@ -4,6 +4,7 @@ import System.Exit
 import XMonad.Util.EZConfig
 import XMonad.Util.Ungrab
 import XMonad.Util.Loggers
+import XMonad.Util.WorkspaceCompare
 
 import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders 
@@ -39,13 +40,14 @@ main :: IO ()
 main = xmonad 
     . ewmhFullscreen
     . ewmh
+		. setEwmhWorkspaceSort getSortByXineramaRule
     . withEasySB (statusBarProp "xmobar ~/.config/xmonad/xmobarrc.icons" (pure myXmobarPP)) defToggleStrutsKey
     $ myConfig 
 
 
 myConfig = def
   { modMask = mod4Mask
-  , layoutHook = spacingRaw False (Border 10 10 10 10) True (Border 10 10 10 10) True $ myLayout
+  , layoutHook = spacingRaw True (Border 10 10 10 10) True (Border 10 10 10 10) True $ myLayout
   , terminal = "alacritty"
   ,  borderWidth = 0
   ,  normalBorderColor  = "#282c34"
