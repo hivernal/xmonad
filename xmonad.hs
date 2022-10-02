@@ -40,7 +40,7 @@ main :: IO ()
 main = xmonad 
     . ewmhFullscreen
     . ewmh
-		. setEwmhWorkspaceSort getSortByXineramaRule
+    . setEwmhWorkspaceSort getSortByXineramaRule
     . withEasySB (statusBarProp "xmobar ~/.config/xmonad/xmobarrc.icons" (pure myXmobarPP)) defToggleStrutsKey
     $ myConfig 
 
