@@ -24,8 +24,8 @@ Config
          , "-H", "10", "-L", "7"
          ] 50
 
-      , Run Kbd [ ("us(dvorak)", "DV"), ("us", "<fn=2>\xf80b<hspace=15/></fn>US")
-                , ("ru(dvorak)", "DV"), ("ru", "<fn=2>\xf80b<hspace=15/></fn>RU")
+      , Run Kbd [ ("us(dvorak)", "DV"), ("us", "<fn=2>\xf80b<hspace=15/></fn>us")
+                , ("ru(dvorak)", "DV"), ("ru", "<fn=2>\xf80b<hspace=15/></fn>ru")
                 ]
       , Run Memory ["-t", "<fn=1>\xf1c0<hspace=10/></fn><used><hspace=5/>Mi"] 20
       , Run Date "<fn=1>\xf017<hspace=10/></fn>%H:%M" "date" 600

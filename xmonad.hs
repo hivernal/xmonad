@@ -22,11 +22,14 @@ myXmobarPP = def
     , ppHidden          = xmobarColor "#fcfcfc" "" . wrap " " " "
 		, ppHiddenNoWindows = xmobarColor "#646870" "" . wrap " " " "
     , ppSep             = " "
-    , ppTitle           = xmobarColor "#fcfcfc" "" .shorten 55
-    , ppOrder           = \[ws, _, t] -> [ws, t]
+    , ppTitle           = xmobarColor "#fcfcfc" "" .shorten 50
+    , ppLayout  = (\ x -> case x of
+        "Spacing Tall"  -> "Tall"
+        "Spacing Full"  -> "Full"
+        _               -> x )
     }
 
-myLayout = smartBorders (withBorder 3 tiled) ||| noBorders Full
+myLayout = smartBorders(withBorder 3 tiled)  ||| noBorders Full
   where
     tiled   = Tall nmaster delta ratio
     nmaster = 1      -- Default number of windows in the master pane
@@ -42,12 +45,13 @@ main = xmonad
     . ewmh
     . setEwmhWorkspaceSort getSortByXineramaRule
     . withEasySB (statusBarProp "xmobar ~/.config/xmonad/xmobarrc.icons" (pure myXmobarPP)) defToggleStrutsKey
+    -- . withEasySB (statusBarProp "polybar" (pure def)) defToggleStrutsKey
     $ myConfig 
 
 
 myConfig = def
   { modMask = mod4Mask
-  , layoutHook = spacingRaw True (Border 10 10 10 10) True (Border 10 10 10 10) True $ myLayout
+  , layoutHook = spacingRaw True (Border 5 5 5 5) True (Border 5 5 5 5) True $ myLayout
   , terminal = "alacritty"
   ,  borderWidth = 0
   ,  normalBorderColor  = "#282c34"
