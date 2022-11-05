@@ -1,6 +1,8 @@
 import XMonad
 import System.Exit
 
+import XMonad.Actions.DwmPromote
+
 import XMonad.Util.EZConfig
 import XMonad.Util.Ungrab
 import XMonad.Util.Loggers
@@ -14,7 +16,7 @@ import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.Place
 import XMonad.Hooks.EwmhDesktops
-
+import XMonad.Hooks.ManageDocks
 
 myXmobarPP :: PP
 myXmobarPP = def
@@ -29,7 +31,7 @@ myXmobarPP = def
         _               -> x )
     }
 
-myLayout = smartBorders(withBorder 3 tiled)  ||| noBorders Full
+myLayout = smartSpacingWithEdge 5 (smartBorders tiled) ||| noBorders Full
   where
     tiled   = Tall nmaster delta ratio
     nmaster = 1      -- Default number of windows in the master pane
@@ -38,6 +40,11 @@ myLayout = smartBorders(withBorder 3 tiled)  ||| noBorders Full
 
 myPlacement = fixed (0.5,0.5)
 
+autostart :: X ()
+autostart = do
+  spawn "picom -b"
+  spawn "lxpolkit &"
+  spawn "feh --bg-max /home/nikita/pictures/neboskreb.jpg"
 
 main :: IO ()
 main = xmonad 
@@ -45,18 +52,18 @@ main = xmonad
     . ewmh
     . setEwmhWorkspaceSort getSortByXineramaRule
     . withEasySB (statusBarProp "xmobar ~/.config/xmonad/xmobarrc.icons" (pure myXmobarPP)) defToggleStrutsKey
-    -- . withEasySB (statusBarProp "polybar" (pure def)) defToggleStrutsKey
     $ myConfig 
 
 
 myConfig = def
   { modMask = mod4Mask
-  , layoutHook = spacingRaw True (Border 5 5 5 5) True (Border 5 5 5 5) True $ myLayout
+  , layoutHook = myLayout
   , terminal = "alacritty"
-  ,  borderWidth = 0
-  ,  normalBorderColor  = "#282c34"
-  ,  focusedBorderColor = "#fcfcfc"
-  ,  manageHook = placeHook myPlacement <> manageHook def
+  , borderWidth = 3
+  , normalBorderColor  = "#282c34"
+  , focusedBorderColor = "#fcfcfc"
+  , manageHook = placeHook myPlacement <> manageHook def
+  , startupHook = autostart
   }
 
   `additionalKeysP` 
@@ -71,10 +78,8 @@ myConfig = def
     , ("<XF86AudioLowerVolume>", spawn "amixer sset Master 5%-")
     , ("<XF86AudioRaiseVolume>", spawn "amixer sset Master 5%+")
     , ("<XF86AudioMute>", spawn "amixer sset Master toggle")
-    -- , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%")
-    -- , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%")
-    -- , ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
 		, ("<Print>", spawn "flameshot gui")
+		, ("M-<Return>", dwmpromote)
     ]
   `removeKeysP`
 
