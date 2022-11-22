@@ -31,7 +31,7 @@ myXmobarPP = def
         _               -> x )
     }
 
-myLayout = smartSpacingWithEdge 5 (smartBorders tiled) ||| noBorders Full
+myLayout = lessBorders OnlyFloat (smartSpacingWithEdge 5 (smartBorders tiled) ||| noBorders Full)
   where
     tiled   = Tall nmaster delta ratio
     nmaster = 1      -- Default number of windows in the master pane

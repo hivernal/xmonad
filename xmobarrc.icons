@@ -22,7 +22,7 @@ Config
          , "-O", "<fn=1>\xf1e6<hspace=15/><leftbar><hspace=20/></fn><left>" -- Battery charging format
          , "-o", "<fn=1><leftbar><hspace=20/></fn><left>" -- Battery discharging format
          , "-H", "10", "-L", "7"
-         ] 50
+         ] 60
 
       , Run Kbd [ ("us(dvorak)", "DV"), ("us", "<fn=2>\xf80b<hspace=15/></fn>us")
                 , ("ru(dvorak)", "DV"), ("ru", "<fn=2>\xf80b<hspace=15/></fn>ru")
