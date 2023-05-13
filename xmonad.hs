@@ -47,7 +47,7 @@ autostart = do
   -- spawn "picom -b"
   spawn "lxpolkit &"
   spawn "feh --bg-max /home/nikita/pictures/astronavt.jpg"
-  setDefaultCursor xC_arrow
+  setDefaultCursor xC_left_ptr
 
 main :: IO ()
 main = xmonad 
@@ -71,7 +71,7 @@ myConfig = def
   }
 
   `additionalKeysP` 
-    [ ("M-p", spawn "dmenu_run -nf '#fcfcfc' -nb '#282c34' -sb '#646870' -sf '#fcfcfc' -fn 'JetBrainsMonoMedium Nerd Font-13'")
+    [ ("M-p", spawn "dmenu_run")
     , ("M-q", kill)
     , ("M-S-r", spawn "if type xmonad; then xmonad --recompile && xmonad --restart; else xmessage xmonad not in \\$PATH: \"$PATH\"; fi")
     , ("M-<Tab>", sendMessage NextLayout)
