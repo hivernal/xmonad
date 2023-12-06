@@ -29,7 +29,7 @@ myXmobarPP = def
     }
 
 -- myLayout = lessBorders OnlyFloat (smartSpacingWithEdge 5 (smartBorders tiled) ||| noBorders Full)
-myLayout = lessBorders OnlyFloat (spacingWithEdge 4 (tiled |||  Full))
+myLayout = lessBorders OnlyFloat (tiled |||  Full)
   where
     tiled   = Tall nmaster delta ratio
     nmaster = 1      -- Default number of windows in the master pane
@@ -41,8 +41,8 @@ myPlacement = fixed (0.5,0.5)
 autostart :: X ()
 autostart = do
   spawn "picom -b"
-  spawn "lxpolkit &"
-  spawn "feh --bg-max /home/nikita/pictures/neboskreb.jpg"
+  -- spawn "lxpolkit &"
+  spawn "feh --bg-fill ~/pictures/groot-dark.png"
   setDefaultCursor xC_left_ptr
 
 main :: IO ()
@@ -60,8 +60,8 @@ myConfig = def
   , layoutHook = myLayout
   , terminal = "alacritty"
   , borderWidth = 3
-  , normalBorderColor  = "#282c34"
-  , focusedBorderColor = "#fcfcfc"
+  , normalBorderColor  = "#5e5f67"
+  , focusedBorderColor = "#d2d9f8"
   , manageHook = placeHook myPlacement <> manageHook def
   , startupHook = autostart
   }
@@ -73,12 +73,12 @@ myConfig = def
     , ("M-<Tab>", sendMessage NextLayout)
     , ("M-S-q", spawn "shutdown -h now")
     , ("M-S-e",  io exitSuccess)
-    , ("<XF86MonBrightnessUp>", spawn "sudo xbacklight -inc 5")
-    , ("<XF86MonBrightnessDown>", spawn "sudo xbacklight -dec 5")
+    , ("<XF86MonBrightnessUp>", spawn "/home/nikita/.config/hypr/brightness.sh up")
+    , ("<XF86MonBrightnessDown>", spawn "/home/nikita/.config/hypr/brightness.sh down")
     -- , ("<XF86AudioLowerVolume>", spawn "amixer sset Master 5%-")
     -- , ("<XF86AudioRaiseVolume>", spawn "amixer sset Master 5%+")
-    , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%")
-    , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%")
+    , ("<XF86AudioLowerVolume>", spawn "/home/nikita/.config/hypr/volume.sh down")
+    , ("<XF86AudioRaiseVolume>", spawn "/home/nikita/.config/hypr/volume.sh up")
     , ("<XF86AudioMute>", spawn "amixer sset Master toggle")
 		, ("<Print>", spawn "flameshot gui")
 		, ("M-<Return>", dwmpromote)
