@@ -40,7 +40,7 @@ myPlacement = fixed (0.5,0.5)
 
 autostart :: X ()
 autostart = do
-  spawn "picom -b"
+  -- spawn "picom -b"
   -- spawn "lxpolkit &"
   spawn "feh --bg-fill ~/pictures/groot-dark.png"
   setDefaultCursor xC_left_ptr
@@ -51,7 +51,7 @@ main = xmonad
     . ewmh
     -- . setEwmhWorkspaceSort getSortByXineramaRule
     -- . withEasySB (statusBarProp "xmobar ~/.config/xmonad/xmobarrc.icons" (pure myXmobarPP)) defToggleStrutsKey
-    . withEasySB (statusBarProp "polybar" (pure def)) defToggleStrutsKey
+    . withEasySB (statusBarProp "/home/nikita/.config/polybar/launch_polybar.sh" (pure def)) defToggleStrutsKey
     $ myConfig
 
 
@@ -71,16 +71,17 @@ myConfig = def
     , ("M-q", kill)
     , ("M-S-r", spawn "if type xmonad; then xmonad --recompile && xmonad --restart; else xmessage xmonad not in \\$PATH: \"$PATH\"; fi")
     , ("M-<Tab>", sendMessage NextLayout)
-    , ("M-S-q", spawn "shutdown -h now")
+    , ("M-S-q", spawn "systemctl poweroff")
     , ("M-S-e",  io exitSuccess)
-    , ("<XF86MonBrightnessUp>", spawn "/home/nikita/.config/hypr/brightness.sh up")
-    , ("<XF86MonBrightnessDown>", spawn "/home/nikita/.config/hypr/brightness.sh down")
+    , ("<XF86MonBrightnessUp>", spawn "/home/nikita/.config/xmonad/brightness.sh up")
+    , ("<XF86MonBrightnessDown>", spawn "/home/nikita/.config/xmonad/brightness.sh down")
     -- , ("<XF86AudioLowerVolume>", spawn "amixer sset Master 5%-")
     -- , ("<XF86AudioRaiseVolume>", spawn "amixer sset Master 5%+")
-    , ("<XF86AudioLowerVolume>", spawn "/home/nikita/.config/hypr/volume.sh down")
-    , ("<XF86AudioRaiseVolume>", spawn "/home/nikita/.config/hypr/volume.sh up")
-    , ("<XF86AudioMute>", spawn "amixer sset Master toggle")
+    , ("<XF86AudioLowerVolume>", spawn "/home/nikita/.config/xmonad/volume.sh down")
+    , ("<XF86AudioRaiseVolume>", spawn "/home/nikita/.config/xmonad/volume.sh up")
+    , ("<XF86AudioMute>", spawn "/home/nikita/.config/xmonad/volume.sh mute")
 		, ("<Print>", spawn "flameshot gui")
+		, ("M-s", spawn "flameshot gui")
 		, ("M-<Return>", dwmpromote)
     ]
   `removeKeysP`
