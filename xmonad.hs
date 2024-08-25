@@ -14,14 +14,16 @@ import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.Place
 import XMonad.Hooks.EwmhDesktops
+import XMonad.ManageHook
 
 myXmobarPP :: PP
 myXmobarPP = def
-    { ppCurrent         = xmobarColor "#fcfcfc" "#5c6667" . wrap " " " "
-    , ppHidden          = xmobarColor "#fcfcfc" "" . wrap " " " "
-		, ppHiddenNoWindows = xmobarColor "#5c6667" "" . wrap " " " "
+    { ppCurrent         = xmobarColor "#d2d9f8" "#5e5f67" . pad
+    , ppHidden          = xmobarColor "#d2d9f8" "" . pad
+		, ppHiddenNoWindows = xmobarColor "#5e5f67" "" . pad
     , ppSep             = " "
-    , ppTitle           = xmobarColor "#fcfcfc" "" .shorten 50
+    , ppWsSep           = " "
+    , ppTitle           = xmobarColor "#d2d9f8" "" .shorten 50
     , ppLayout  = (\ x -> case x of
         "Spacing Tall"  -> "Tall"
         "Spacing Full"  -> "Full"
@@ -42,13 +44,19 @@ autostart :: X ()
 autostart = do
   -- spawn "picom -b"
   -- spawn "lxpolkit &"
-  spawn "feh --bg-fill ~/pictures/groot-dark.png"
+  spawn "feh --bg-fill ~/pictures/neboskreb.jpg"
   setDefaultCursor xC_left_ptr
+
+myManageHook :: ManageHook
+myManageHook = composeAll
+    [ className =? "Chromium" --> doShift "1"
+    , className =? "Evince" --> doShift "3"
+    ]
 
 main :: IO ()
 main = xmonad
-    . ewmhFullscreen
     . ewmh
+    . ewmhFullscreen
     -- . setEwmhWorkspaceSort getSortByXineramaRule
     -- . withEasySB (statusBarProp "xmobar ~/.config/xmonad/xmobarrc.icons" (pure myXmobarPP)) defToggleStrutsKey
     . withEasySB (statusBarProp "/home/nikita/.config/polybar/launch_polybar.sh" (pure def)) defToggleStrutsKey
@@ -62,7 +70,8 @@ myConfig = def
   , borderWidth = 3
   , normalBorderColor  = "#5e5f67"
   , focusedBorderColor = "#d2d9f8"
-  , manageHook = placeHook myPlacement <> manageHook def
+  , manageHook = myManageHook
+  -- , manageHook = placeHook myPlacement <> manageHook def
   , startupHook = autostart
   }
 

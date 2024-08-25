@@ -5,9 +5,9 @@ Config
                       , "JetBrainsMono Nerd Font Bold 21"
 											, "JetBrainsMono Nerd Font Bold 15" ]
   , font     = "JetBrainsMono Nerd Font Bold 12"
-  , bgColor  = "#282c34"
-  , fgColor  = "#fcfcfc"
-  , position = TopH 50
+  , bgColor  = "#1a1b26"
+  , fgColor  = "#d2d9f8"
+  , position = TopH 26
   , commands =
       [ Run BatteryP ["BAT0"]
          [ "-t", "<acstatus>"
@@ -40,7 +40,7 @@ Config
 					, "-f", "\xf057f\xf0580\xf0580\xf0580\xf057e\xf057e\xf057e\xf057e\xf057e\xf057e"
 					, "--"
 					, "-O", ""
-					, "-o", "mutted"
+					, "-o", "muted"
 					, "-c", "fgColor"
 					]
       ]
